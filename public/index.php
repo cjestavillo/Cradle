@@ -6,6 +6,7 @@ return cradle()
     //add routes here
     ->register('/app/admin')
     ->register('/app/www')
+    ->register('/app/install')
 
     //start rendering
     ->render();
