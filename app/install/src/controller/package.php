@@ -216,6 +216,20 @@ $this->get('/admin/package/packagist/search', function ($request, $response) {
 });
 
 /**
+ * Process Package Install
+ * 
+ * @param Request $request
+ * @param Response $response
+ */
+$this->get('/admin/package/install/:name', function ($request, $response) {
+    $request->setStage(0, 'install');
+    $request->setStage(1, 'cradlephp/cradle-profile');
+    $request->setStage('results', true);
+
+    exit;
+});
+
+/**
  * Process Package Enable
  * 
  * @param Request $request
