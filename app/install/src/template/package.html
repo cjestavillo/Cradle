@@ -49,42 +49,55 @@
                         <th>Name</th>
                         <th>Version</th>
                         <th>Type</th>
+                        <th>Current Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     {{#each rows}}
                         <tr>
                             <td>
-                                {{#if active}}
-                                <a class="text-danger" href="/admin/package/disable/{{key}}?type={{type}}" title="Disable Package">
-                                    <i class="fas fa-times"></i>
-                                </a>
+                                {{#if install_pending}}
+                                    <i class="fas fa-spinner fa-spin text-muted"></i>
                                 {{else}}
-                                <a class="text-success" href="/admin/package/enable/{{key}}?type={{type}}" title="Enable Package">
-                                    <i class="fas fa-reply"></i>
-                                </a>
+                                    {{#if active}}
+                                    <a class="text-danger" href="/admin/package/disable/{{key}}?type={{type}}" title="Disable Package">
+                                        <i class="fas fa-times"></i>
+                                    </a>
+                                    {{else}}
+                                    <a class="text-success" href="/admin/package/enable/{{key}}?type={{type}}" title="Enable Package">
+                                        <i class="fas fa-reply"></i>
+                                    </a>
+                                    {{/if}}
+
+                                    {{#if active}}
+                                        {{#if installable}}
+                                            {{#if version}}
+                                                <a href="/admin/package/update/{{key}}?type={{type}}" title="Update Package">
+                                                    <i class="fas fa-arrow-up"></i>
+                                                </a>
+                                                <a class="text-warning" href="/admin/package/remove/{{key}}?type={{type}}" title="Remove Package">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            {{else}}
+                                                <a href="/admin/package/install/{{key}}?type={{type}}" title="Install Package">
+                                                    <i class="fas fa-arrow-down"></i>
+                                                </a>
+                                            {{/if}}
+                                        {{/if}}
+                                    {{/if}}
                                 {{/if}}
 
-                                {{#when type '===' 'vendor'}}
-                                <a class="text-warning" href="#" title="Remove Package">
-                                    <i class="fas fa-trash"></i>
-                                </a>
-                                {{/when}}
-
-                                {{#if active}}
-                                    {{#if installable}}
-                                        {{#if version}}
-                                            <a href="#" title="Update Package">
-                                                <i class="fas fa-arrow-up"></i>
-                                            </a>
-                                        {{else}}
-                                            <a href="#" title="Install Package">
-                                                <i class="fas fa-arrow-down"></i>
-                                            </a>
-                                        {{/if}}
-                                    {{else}}
-                                        
-                                    {{/if}}
+                                {{#if install_log}}
+                                    <a 
+                                        href="#" 
+                                        class="text-muted" 
+                                        title="Package Log"
+                                        data-log="{{log_key}}"
+                                        data-toggle="modal" 
+                                        data-target="#packageLogModal"
+                                    >
+                                        <i class="fas fa-history"></i>
+                                    </a>
                                 {{/if}}
                             </td>
                             <td>
@@ -118,6 +131,13 @@
                                     {{/when}}
                                 >{{type}}-package</span>
                             </td>
+                            <td>
+                                {{#if install_log.status}}
+                                    {{install_log.status}}
+                                {{else}}
+                                    none
+                                {{/if}}
+                            </td>
                         </tr>
                     {{/each}}
                 </tbody>
@@ -130,3 +150,5 @@
         {{/if}}
     </div>
 </div>
+
+{{> package/_log-modal}}

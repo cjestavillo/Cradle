@@ -1,0 +1,14 @@
+{
+    "name": "cjzamora/cradle-comment",
+    "description": "Testing package for CradlePHP",
+    "type": "cradle-package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Charles Zamora",
+            "email": "charles.andacc@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
