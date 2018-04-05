@@ -1,3 +1,15 @@
-[36m[cradle] Installing root package /module/cradle-comment.[0m
-[32m[cradle] /module/cradle-comment was installed to 0.0.1[0m
-{"results":{"schemas":["comment"],"version":"0.0.1"}}
+[36m[cradle] Installing vendor package cjzamora/cradle-article.[0m
+[36m[cradle] Installing package version 1.3.0 via composer.[0m
+[36m[cradle] <info>./composer.json has been updated</info>[0m
+[36m[cradle] <info>Loading composer repositories with package information</info>[0m
+[36m[cradle] <info>Updating dependencies (including require-dev)</info>[0m
+[36m[cradle] <info>Package operations: 1 install, 0 updates, 0 removals</info>[0m
+[36m[cradle]   - Installing <info>cjzamora/cradle-article</info> (<comment>1.3.0</comment>):[0m
+[36m[cradle] Loading from cache[0m
+[36m[cradle] <info>Writing lock file</info>[0m
+[36m[cradle] <info>Generating autoload files</info>[0m
+[36m[cradle] > PhantomInstaller\Installer::installPhantomJS[0m
+[36m[cradle]    - PhantomJS v2.1.1 is already installed. Skipping the installation.[0m
+[36m[cradle] Package has been installed.[0m
+[32m[cradle] cjzamora/cradle-article was installed to 0.0.1[0m
+{"results":{"schemas":["article"],"version":"0.0.1"}}
