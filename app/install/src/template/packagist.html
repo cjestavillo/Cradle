@@ -58,39 +58,35 @@
                     {{#each rows}}
                         <tr>
                             <td>
-                                {{#if log}}
+                                {{#if install_pending}}
+                                    <i class="fas fa-spinner fa-spin text-muted"></i>
+                                {{else}}
+                                    {{#if installed}}
+                                        {{#if active}}
+                                        <a class="text-warning" href="/admin/package/remove/{{key}}?type=vendor&redirect={{request 'server' 'REQUEST_URI'}}" title="Remove Package">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                        <a href="/admin/package/update/{{key}}?type=vendor&redirect={{request 'server' 'REQUEST_URI'}}" title="Update Package">
+                                            <i class="fas fa-arrow-up"></i>
+                                        </a>
+                                        {{/if}}
+                                    {{else}}
+                                    <a href="/admin/package/install/{{key}}?type=vendor&redirect={{request 'server' 'REQUEST_URI'}}" title="Install Package">
+                                        <i class="fas fa-arrow-down"></i>
+                                    </a>
+                                    {{/if}}
+                                {{/if}}
+                                {{#if install_log}}
                                     <a 
                                         href="#" 
                                         class="text-muted" 
                                         title="Package Log"
-                                        data-log="{{log}}"
+                                        data-log="{{log_key}}"
                                         data-toggle="modal" 
                                         data-target="#packageLogModal"
                                     >
                                         <i class="fas fa-history"></i>
                                     </a>
-                                {{/if}}
-                                {{#if pending}}
-                                    <i class="fas fa-spinner fa-spin text-muted"></i>
-                                {{else}}
-                                    {{#if installed}}
-                                        {{#if active}}
-                                        <a class="text-warning" href="/admin/package/remove/{{key}}?type=vendor" title="Remove Package">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                        <a href="/admin/package/update/{{key}}?type=vendor" title="Update Package">
-                                            <i class="fas fa-arrow-up"></i>
-                                        </a>
-                                        {{else}}
-                                        <a class="text-success" href="/admin/package/enable/{{key}}?type=vendor" title="Enable Package">
-                                            <i class="fas fa-reply"></i>
-                                        </a>
-                                        {{/if}}
-                                    {{else}}
-                                    <a href="/admin/package/install/{{key}}?type=vendor" title="Install Package">
-                                        <i class="fas fa-arrow-down"></i>
-                                    </a>
-                                    {{/if}}
                                 {{/if}}
                             </td>
                             <td>

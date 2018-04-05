@@ -72,11 +72,11 @@
                                     {{#if active}}
                                         {{#if installable}}
                                             {{#if version}}
-                                                <a href="/admin/package/update/{{key}}?type={{type}}" title="Update Package">
-                                                    <i class="fas fa-arrow-up"></i>
-                                                </a>
                                                 <a class="text-warning" href="/admin/package/remove/{{key}}?type={{type}}" title="Remove Package">
                                                     <i class="fas fa-trash"></i>
+                                                </a>
+                                                <a href="/admin/package/update/{{key}}?type={{type}}" title="Update Package">
+                                                    <i class="fas fa-arrow-up"></i>
                                                 </a>
                                             {{else}}
                                                 <a href="/admin/package/install/{{key}}?type={{type}}" title="Install Package">

@@ -159,6 +159,8 @@ $this->get('/admin/package/search', function ($request, $response) {
         }
     }
 
+    // $this->inspect($packages);
+
     // merge data
     $data = array_merge([ 'rows' => $packages, 'total' => count($packages) ], $request->getStage());
 
@@ -236,13 +238,16 @@ $this->get('/admin/package/packagist/search', function ($request, $response) {
                     $results[$key]['installed'] = true;
                 }
 
+                // set install log key
+                $results[$key]['log_key'] = str_replace('/', '.', $name);
+
                 // recent log?
-                $log = $this->package('global')->path('config') . '/packages/%s.log.php';
-                $log = sprintf($log, str_replace('/', '.', $name));
+                $log = $this->package('global')->path('config') . '/packages/%s.install.php';
+                $log = sprintf($log, $results[$key]['log_key']);
 
                 // log file exists?
                 if (file_exists($log)) {
-                    $results[$key]['log'] = str_replace(
+                    $results[$key]['install_log'] = str_replace(
                         $this->package('global')->path('config') . '/packages/',
                         '',
                         $log
@@ -256,7 +261,7 @@ $this->get('/admin/package/packagist/search', function ($request, $response) {
                         // pending action?
                         if (strpos($log['status'], 'pending') > 0) {
                             // set pending flag
-                            $results[$key]['pending'] = 1;
+                            $results[$key]['install_pending'] = 1;
                         }
 
                         // get the latest status
