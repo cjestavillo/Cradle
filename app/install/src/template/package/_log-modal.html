@@ -10,8 +10,8 @@
         <div class="modal-body">
             <pre id="logBody" class="border border-light p-3 bg-light">
             </pre>
-            <div class="status hide text-right">
-                Refreshing <i class="fas fa-circle-notch fa-spin"></i>
+            <div class="status invisible text-right">
+                Updating <i class="fas fa-circle-notch fa-spin"></i>
             </div>
         </div>
         <div class="modal-footer">
@@ -51,7 +51,9 @@
 
                 processing = true;
 
-                $('#packageLogModal .status').removeClass('hidden');
+                $('#packageLogModal .status')
+                    .addClass('visible')
+                    .removeClass('invisible');
 
                 // parse the log file
                 $.get(requestPath, function(response) {
@@ -86,7 +88,9 @@
                     $('#packageLogModal #logBody').html(data.join('<br/>'));
 
                     setTimeout(function() {
-                        $('#packageLogModal .status').addClass('hidden');
+                        $('#packageLogModal .status')
+                            .removeClass('visible')
+                            .addClass('invisible');
                     }, 1000);
                 });
             };
